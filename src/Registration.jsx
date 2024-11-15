@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 const Register = ({ onSuccessfulRegistration }) => {
   // Task 3: Define State Variables
   // Hint: Define state variables to manage user input fields (name, email, password, repeatPassword).
-  // const [user, setUser] = useState({})
+  const [user, setUser] = useState({})
 
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formValid, setFormValid] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -21,10 +21,12 @@ const Register = ({ onSuccessfulRegistration }) => {
     // Example validation functions
     const isNameValid = (name) => {
       // Check if name is valid
+      return name.trim().length > 0;
     };
 
     const isEmailValid = (email) => {
       // Check if email is valid
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     };
 
     const hasTenOrMoreChars = (str) => str.length >= 10;
@@ -39,18 +41,18 @@ const Register = ({ onSuccessfulRegistration }) => {
       user.password === user.repeatPassword
     ) {
       setFormValid(true);
-      console.log('User Data:', user);
-      localStorage.setItem('userData', JSON.stringify(user));
+      console.log("User Data:", user);
+      localStorage.setItem("userData", JSON.stringify(user));
       onSuccessfulRegistration();
       setUser({
-        name: '',
-        email: '',
-        password: '',
-        repeatPassword: '',
+        name: "",
+        email: "",
+        password: "",
+        repeatPassword: "",
       });
     } else {
       setFormValid(false);
-      setErrorMessage('Please check your inputs');
+      setErrorMessage("Please check your inputs");
     }
   };
 

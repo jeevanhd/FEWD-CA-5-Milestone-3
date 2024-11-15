@@ -1,14 +1,14 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 
 // Truncate text to a specified number of words per line
 const truncateText = (text, maxWordsPerLine) => {
-  const words = text.split(' ');
+  const words = text.split(" ");
   const lines = [];
   for (let i = 0; i < words.length; i += maxWordsPerLine) {
-    lines.push(words.slice(i, i + maxWordsPerLine).join(' '));
+    lines.push(words.slice(i, i + maxWordsPerLine).join(" "));
   }
-  return lines.join('<br />');
+  return lines.join("<br />");
 };
 
 // Task 5: Render the list of books
@@ -16,17 +16,24 @@ const truncateText = (text, maxWordsPerLine) => {
 // Use the truncateText function for the title and authors to ensure proper formatting.
 
 const BooksList = ({ books }) => {
+  console.log(books);
   return (
     <div className="books-grid">
       {books.map((book) => (
         <div key={book.id} className="book-item">
           {/* Task 5.1: Display the book's thumbnail */}
+          <img src={book.thumbnail} alt={book.title} />
           <p
             dangerouslySetInnerHTML={{
               __html: truncateText(book.title, 3),
             }}
           />
           {/* Task 5.2: Use truncateText to display the book's authors */}
+          <p
+            dangerouslySetInnerHTML={{
+              __html: truncateText(book.authors.join(", "), 3),
+            }}
+          />
           <p className="free">Free</p>
         </div>
       ))}
